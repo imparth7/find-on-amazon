@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Amazon Product Search Results</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f1f4f8;
+                margin: 0;
+                padding: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                color: #333;
+            }
+
+            h1 {
+                font-size: 2em;
+                color: #333;
+                margin: 30px 0 10px;
+            }
+
+            .products-container {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 20px;
+                padding: 20px;
+                max-width: 1200px;
+                width: 100%;
+                justify-content: center;
+            }
+
+            .card {
+                background-color: #ffffff;
+                box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+                border-radius: 10px;
+                overflow: hidden;
+                width: 300px;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+                text-align: center;
+                padding: 20px;
+                position: relative;
+                text-decoration: none;
+                color: inherit;
+            }
+
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 12px 20px rgba(0, 0, 0, 0.25);
+            }
+
+            .card img {
+                width: 100%;
+                height: 200px;
+                object-fit: contain;
+                border-radius: 8px;
+                margin-bottom: 15px;
+            }
+
+            .card-title {
+                color: #0073e6;
+                font-weight: bold;
+                font-size: 1.2em;
+                display: block;
+                margin-bottom: 10px;
+                transition: color 0.3s ease;
+                text-decoration: none;
+            }
+
+            .card-title:hover {
+                color: #005bb5;
+            }
+
+            .price {
+                font-size: 1.1em;
+                color: #555;
+                margin-top: 5px;
+                font-weight: bold;
+                color: #28a745;
+                font-size: 1.2em;
+            }
+
+            .no-results {
+                font-size: 1.3em;
+                color: #777;
+                margin-top: 60px;
+            }
+
+            /* Button Styling */
+            .btn {
+                display: inline-block;
+                padding: 12px 30px;
+                font-size: 16px;
+                font-weight: 600;
+                text-align: center;
+                text-decoration: none;
+                border-radius: 50px;
+                background: linear-gradient(135deg, #6e7bff, #a85ed9);
+                color: white;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                transition: all 0.3s ease;
+            }
+
+            .btn:hover {
+                background: linear-gradient(135deg, #a85ed9, #6e7bff);
+                transform: translateY(-3px);
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            }
+
+            .btn:active {
+                transform: translateY(1px);
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Search Results</h1>
+
+        {% if products %}
+        <div class="products-container">
+            {% for product in products %}
+            <a href="{{ product.link }}" target="_blank" class="card">
+                <img src="{{ product.image }}" alt="{{ product.title }}" />
+                <div class="card-title">{{ product.title }}</div>
+                <p class="price btn">Buy at {{ product.price }}</p>
+            </a>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="no-results">No products found.</p>
+        {% endif %}
+    </body>
+</html>
